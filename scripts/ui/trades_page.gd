@@ -25,13 +25,13 @@ func _notification(what: int) -> void:
 
 
 func _apply_styles() -> void:
-	UiStyle.apply_title_label(_header_label)
-	UiStyle.apply_body_label(_disclaimer_label, true)
-	UiStyle.apply_body_label(_status_label, true)
+	UiStyle.apply_section_label(_header_label)
+	UiStyle.apply_body_label(_disclaimer_label, true, 16)
+	UiStyle.apply_body_label(_status_label, true, 17)
 	UiStyle.apply_line_edit(_wanted_edit)
 	UiStyle.apply_line_edit(_offered_edit)
 	UiStyle.apply_primary_button(_save_button)
-	UiStyle.apply_panel(_panel)
+	UiStyle.apply_panel(_panel, true)
 	_header_label.text = "Trades"
 	_disclaimer_label.text = (
 		"Prototype planning only. Postcard Pact does not guarantee, broker, automate, "

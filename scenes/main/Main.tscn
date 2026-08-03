@@ -33,10 +33,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 88
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 96
 
 [node name="PageStack" type="Control" parent="ContentRoot"]
 clip_contents = true
@@ -66,13 +66,32 @@ horizontal_scroll_mode = 0
 [node name="HomeBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 
-[node name="HomeTitle" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+[node name="HomeHeroPanel" type="PanelContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeroBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeHeroPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HomeEyebrow" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeHeroPanel/HeroBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TRAVEL COMPANION"
+
+[node name="HomeTitle" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeHeroPanel/HeroBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Postcard Pact"
-horizontal_alignment = 1
+
+[node name="HomeTagline" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeHeroPanel/HeroBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Find postcard partners across the 18 habitats."
 
 [node name="HomeDisclaimer" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
 unique_name_in_owner = true
@@ -89,27 +108,67 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="SummaryEyebrow" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788235, 0.658824, 0.290196, 1)
+theme_override_font_sizes/font_size = 15
+text = "YOUR LOCAL PROFILE"
+
 [node name="HomeDisplayName" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
 text = "Display name"
 
-[node name="HomeRegion" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+[node name="MetricsRow" type="HBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HomeRegionMetric" type="PanelContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RegionMetricBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeRegionMetric"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="RegionMetricTitle" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeRegionMetric/RegionMetricBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788235, 0.658824, 0.290196, 1)
+theme_override_font_sizes/font_size = 14
+text = "HABITAT"
+
+[node name="HomeRegion" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeRegionMetric/RegionMetricBox"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
 text = "Region"
 
-[node name="HomeNeededCount" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+[node name="HomeNeededMetric" type="PanelContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NeededMetricBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeNeededMetric"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="NeededMetricTitle" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeNeededMetric/NeededMetricBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788235, 0.658824, 0.290196, 1)
+theme_override_font_sizes/font_size = 14
+text = "LOOKING FOR"
+
+[node name="HomeNeededCount" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox/MetricsRow/HomeNeededMetric/NeededMetricBox"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
-text = "Needed regions"
+text = "0 needed"
 
 [node name="HomeSetupButton" type="Button" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 56)
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "Set Up Profile"
 
@@ -327,12 +386,14 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="ProfileHeader" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.4, 1)
 theme_override_font_sizes/font_size = 34
 text = "Profile"
 
 [node name="ProfileHint" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788235, 0.752941, 0.85098, 1)
 theme_override_font_sizes/font_size = 18
@@ -360,19 +421,21 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
 theme_override_font_sizes/font_size = 20
-text = "Needed regions"
+text = "Needed habitats"
 
 [node name="NeededScroll" type="ScrollContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
-custom_minimum_size = Vector2(0, 220)
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 
-[node name="NeededRegionsList" type="VBoxContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox/NeededScroll"]
+[node name="NeededRegionsList" type="GridContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox/NeededScroll"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 6
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+columns = 2
 
 [node name="SaveProfileButton" type="Button" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
 unique_name_in_owner = true
@@ -398,14 +461,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -72.0
+offset_top = -84.0
 grow_horizontal = 2
 grow_vertical = 0
-self_modulate = Color(0.227451, 0.184314, 0.333333, 1)
 
 [node name="NavRow" type="HBoxContainer" parent="BottomNav"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="HomeButton" type="Button" parent="BottomNav/NavRow"]

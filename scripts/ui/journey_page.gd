@@ -28,11 +28,11 @@ func _notification(what: int) -> void:
 
 
 func _apply_styles() -> void:
-	UiStyle.apply_title_label(_header_label)
-	UiStyle.apply_body_label(_partner_label)
-	UiStyle.apply_body_label(_disclaimer_label, true)
-	UiStyle.apply_body_label(_status_label, true)
-	UiStyle.apply_panel(_panel)
+	UiStyle.apply_section_label(_header_label)
+	UiStyle.apply_body_label(_partner_label, false, 22)
+	UiStyle.apply_body_label(_disclaimer_label, true, 16)
+	UiStyle.apply_body_label(_status_label, true, 17)
+	UiStyle.apply_panel(_panel, true)
 	_header_label.text = "Journey"
 	_disclaimer_label.text = (
 		"User-reported prototype journey. Progress is entered manually and is never "
@@ -41,8 +41,9 @@ func _apply_styles() -> void:
 	for check in [
 		_interacted_check, _gift_sent_check, _gift_opened_check, _committed_check
 	]:
-		check.add_theme_font_size_override("font_size", 18)
+		check.add_theme_font_size_override("font_size", 20)
 		check.add_theme_color_override("font_color", UiStyle.TEXT_LIGHT)
+		check.custom_minimum_size = Vector2(0, 40)
 
 
 func _wire_signals() -> void:

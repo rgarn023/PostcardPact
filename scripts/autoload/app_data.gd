@@ -5,7 +5,6 @@ signal profile_changed(profile: UserProfile)
 signal journey_changed(journey: FriendshipJourney)
 signal trade_changed(trade: TradeRequest)
 
-const REGIONS_PATH := "res://data/regions.json"
 const SAMPLE_PROFILES_PATH := "res://data/sample_profiles.json"
 
 var profile: UserProfile = UserProfile.new()
@@ -16,7 +15,7 @@ var sample_matches: Array[MatchProfile] = []
 
 
 func _ready() -> void:
-	_load_regions()
+	regions = RegionService.load_regions()
 	_load_sample_matches()
 	reload_from_disk()
 
@@ -47,6 +46,13 @@ func reload_from_disk() -> void:
 func save_profile(updated: UserProfile) -> bool:
 	if updated == null:
 		push_error("AppData: Cannot save a null profile.")
+		return false
+
+	# Keep persistence compatible while normalizing to official habitats when possible.
+	updated.needed_regions = RegionService.filter_to_official(updated.needed_regions)
+	updated.offered_regions = RegionService.filter_to_official(updated.offered_regions)
+	if not RegionService.is_official_region(updated.region):
+		push_warning("AppData: Refusing to save non-official postcard region '%s'." % updated.region)
 		return false
 
 	var now := LocalStorage.utc_timestamp()
@@ -100,27 +106,6 @@ func save_trade(updated: TradeRequest) -> bool:
 	trade = updated
 	trade_changed.emit(trade)
 	return true
-
-
-func _load_regions() -> void:
-	regions = PackedStringArray()
-	var data := LocalStorage.load_res_dictionary(REGIONS_PATH)
-	var list: Variant = data.get("regions", [])
-	if list is Array:
-		for item: Variant in list:
-			var region_name := str(item).strip_edges()
-			if not region_name.is_empty():
-				regions.append(region_name)
-
-	if regions.is_empty():
-		push_warning("AppData: No regions loaded; using fallback list.")
-		regions = PackedStringArray([
-			"North America East",
-			"North America West",
-			"Western Mediterranean",
-			"Japanese Archipelago",
-			"Oceania",
-		])
 
 
 func _load_sample_matches() -> void:

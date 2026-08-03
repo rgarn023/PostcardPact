@@ -38,8 +38,20 @@ func _ready() -> void:
 		push_error("MobileNavigation: Required nodes are missing. Navigation disabled.")
 		return
 
+	_style_chrome()
 	_is_ready = true
 	_show_page(Page.HOME)
+
+
+func _style_chrome() -> void:
+	var bottom_nav := get_node_or_null("BottomNav") as PanelContainer
+	if bottom_nav != null:
+		UiStyle.apply_bottom_nav(bottom_nav)
+
+	for page_key: Variant in _nav_buttons.keys():
+		var button: Button = _nav_buttons[page_key] as Button
+		if button != null:
+			UiStyle.apply_nav_button(button, false)
 
 
 func get_current_page_name() -> String:
@@ -191,5 +203,7 @@ func _update_nav_button_states(active_page: Page) -> void:
 		if button == null:
 			push_warning("MobileNavigation: Skipping null nav button for key '%s'." % str(page_key))
 			continue
+		var is_active: bool = (page_key == active_page)
 		# Disable only the button for the currently selected page.
-		button.disabled = (page_key == active_page)
+		button.disabled = is_active
+		UiStyle.apply_nav_button(button, is_active)

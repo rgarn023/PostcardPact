@@ -1,10 +1,12 @@
 extends Control
-## Offline profile editor with local save/reset.
+## Offline profile editor with official 18-habitat region selection.
 
+@onready var _header_label: Label = %ProfileHeader
+@onready var _hint_label: Label = %ProfileHint
 @onready var _display_name_edit: LineEdit = %DisplayNameEdit
 @onready var _trainer_code_edit: LineEdit = %TrainerCodeEdit
 @onready var _region_option: OptionButton = %RegionOption
-@onready var _needed_list: VBoxContainer = %NeededRegionsList
+@onready var _needed_list: GridContainer = %NeededRegionsList
 @onready var _save_button: Button = %SaveProfileButton
 @onready var _reset_button: Button = %ResetProfileButton
 @onready var _status_label: Label = %ProfileStatusLabel
@@ -27,14 +29,22 @@ func _notification(what: int) -> void:
 
 
 func _apply_styles() -> void:
+	UiStyle.apply_section_label(_header_label)
+	UiStyle.apply_body_label(_hint_label, true, 17)
 	UiStyle.apply_line_edit(_display_name_edit)
 	UiStyle.apply_line_edit(_trainer_code_edit)
+	UiStyle.apply_option_button(_region_option)
 	UiStyle.apply_primary_button(_save_button)
 	UiStyle.apply_secondary_button(_reset_button)
-	UiStyle.apply_body_label(_status_label, true)
+	UiStyle.apply_body_label(_status_label, true, 17)
+	_header_label.text = "Profile"
 	_display_name_edit.placeholder_text = "Display name"
 	_trainer_code_edit.placeholder_text = "Trainer code (numbers and spaces)"
-	_status_label.text = "Enter your local profile details. Trainer codes stay on this device."
+	_hint_label.text = (
+		"Saved only on this device. Choose from the official 18 postcard habitats. "
+		+ "Never enter a Pokémon GO password."
+	)
+	_status_label.text = "Trainer codes stay on this device."
 
 
 func _wire_signals() -> void:
@@ -46,7 +56,7 @@ func _wire_signals() -> void:
 
 func _populate_regions() -> void:
 	_region_option.clear()
-	_region_option.add_item("Select your postcard region")
+	_region_option.add_item("Select your postcard habitat")
 	_region_option.set_item_disabled(0, true)
 
 	for region_name: String in AppData.regions:
@@ -55,12 +65,14 @@ func _populate_regions() -> void:
 	for child in _needed_list.get_children():
 		child.queue_free()
 	_needed_checks.clear()
+	_needed_list.columns = 2
 
 	for region_name: String in AppData.regions:
 		var check := CheckBox.new()
 		check.text = region_name
-		check.add_theme_font_size_override("font_size", 18)
+		check.add_theme_font_size_override("font_size", 17)
 		check.add_theme_color_override("font_color", UiStyle.TEXT_LIGHT)
+		check.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_needed_list.add_child(check)
 		_needed_checks[region_name] = check
 
@@ -84,10 +96,18 @@ func _load_into_form(profile: UserProfile) -> void:
 			break
 	_region_option.select(region_index)
 
+	var official_needed := RegionService.filter_to_official(profile.needed_regions)
 	for region_name: Variant in _needed_checks.keys():
 		var check: CheckBox = _needed_checks[region_name] as CheckBox
 		if check != null:
-			check.button_pressed = profile.needed_regions.has(str(region_name))
+			check.button_pressed = official_needed.has(str(region_name))
+
+	if not profile.region.is_empty() and not RegionService.is_official_region(profile.region):
+		_status_label.add_theme_color_override("font_color", UiStyle.DANGER)
+		_status_label.text = (
+			"Saved region '%s' is outdated. Please select an official habitat and save."
+			% profile.region
+		)
 
 
 func _on_save_pressed() -> void:
@@ -104,7 +124,6 @@ func _on_save_pressed() -> void:
 		return
 
 	var updated := AppData.profile if AppData.profile != null else UserProfile.new()
-	# Copy into a fresh object so we don't mutate half-saved state on failure.
 	updated = UserProfile.from_dictionary(updated.to_dictionary())
 	updated.display_name = display_name
 	updated.trainer_code = trainer_code
@@ -117,7 +136,7 @@ func _on_save_pressed() -> void:
 		_status_label.text = "Profile saved on this device."
 	else:
 		_status_label.add_theme_color_override("font_color", UiStyle.DANGER)
-		_status_label.text = "Could not save profile. Check device storage permissions."
+		_status_label.text = "Could not save profile. Check region selection and storage."
 
 
 func _on_reset_pressed() -> void:
@@ -133,7 +152,7 @@ func _collect_needed_regions() -> PackedStringArray:
 		var check: CheckBox = _needed_checks[region_name] as CheckBox
 		if check != null and check.button_pressed:
 			selected.append(str(region_name))
-	return selected
+	return RegionService.filter_to_official(selected)
 
 
 func _validate(display_name: String, trainer_code: String, region: String) -> String:
@@ -144,17 +163,17 @@ func _validate(display_name: String, trainer_code: String, region: String) -> St
 	if not _is_valid_trainer_code(trainer_code):
 		return "Trainer code may contain numbers and spaces only."
 	if region.is_empty() or region.begins_with("Select "):
-		return "Please select your postcard region."
+		return "Please select your postcard habitat."
+	if not RegionService.is_official_region(region):
+		return "Please choose one of the official 18 postcard habitats."
 	return ""
 
 
 func _is_valid_trainer_code(value: String) -> bool:
-	# Allow digits and spaces only; reject letters and symbols.
 	for i in value.length():
 		var ch := value.unicode_at(i)
 		var is_digit := ch >= 48 and ch <= 57
 		var is_space := ch == 32
 		if not is_digit and not is_space:
 			return false
-	# Must contain at least one digit.
 	return value.replace(" ", "").length() > 0

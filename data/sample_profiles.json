@@ -1,0 +1,75 @@
+{
+  "disclaimer": "Prototype sample profiles only. Not real users. Habitat names are the official 18 postcard/Vivillon regions. All matching content is local test data.",
+  "profiles": [
+    {
+      "profile_id": "sample_001",
+      "display_name": "Harbor Lantern",
+      "country": "Portugal",
+      "region": "Marine",
+      "offered_regions": ["Marine", "Archipelago"],
+      "needed_regions": ["Sun", "Sandstorm"],
+      "wanted_creatures": ["Coastal scout", "Tide runner"],
+      "offered_creatures": ["Cliff sentinel"],
+      "interaction_frequency": "Daily",
+      "available_to_send": true,
+      "last_active": "Prototype data",
+      "is_blocked": false
+    },
+    {
+      "profile_id": "sample_002",
+      "display_name": "Maple Route",
+      "country": "Canada",
+      "region": "Polar",
+      "offered_regions": ["Polar", "Icy Snow"],
+      "needed_regions": ["Garden", "Meadow"],
+      "wanted_creatures": ["Forest walker"],
+      "offered_creatures": ["Snowfield guide", "Trail marker"],
+      "interaction_frequency": "A few times a week",
+      "available_to_send": true,
+      "last_active": "Prototype data",
+      "is_blocked": false
+    },
+    {
+      "profile_id": "sample_003",
+      "display_name": "Sakura Post",
+      "country": "Japan",
+      "region": "Elegant",
+      "offered_regions": ["Elegant", "Monsoon"],
+      "needed_regions": ["Savanna", "Jungle"],
+      "wanted_creatures": ["Garden spark"],
+      "offered_creatures": ["Temple breeze"],
+      "interaction_frequency": "Weekends",
+      "available_to_send": false,
+      "last_active": "Prototype data",
+      "is_blocked": false
+    },
+    {
+      "profile_id": "sample_004",
+      "display_name": "Desert Compass",
+      "country": "Morocco",
+      "region": "Sandstorm",
+      "offered_regions": ["Sandstorm", "Sun"],
+      "needed_regions": ["Modern", "High Plains"],
+      "wanted_creatures": ["Dune rover"],
+      "offered_creatures": ["Oasis keeper"],
+      "interaction_frequency": "Daily",
+      "available_to_send": true,
+      "last_active": "Prototype data",
+      "is_blocked": false
+    },
+    {
+      "profile_id": "sample_005",
+      "display_name": "Fjord Stamp",
+      "country": "Norway",
+      "region": "Icy Snow",
+      "offered_regions": ["Icy Snow", "Tundra"],
+      "needed_regions": ["Ocean", "River"],
+      "wanted_creatures": ["Aurora watcher"],
+      "offered_creatures": ["Fjord courier"],
+      "interaction_frequency": "A few times a week",
+      "available_to_send": true,
+      "last_active": "Prototype data",
+      "is_blocked": false
+    }
+  ]
+}

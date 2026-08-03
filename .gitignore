@@ -1,0 +1,8 @@
+.godot/
+*.translation
+android/
+build/*.apk
+build/*.log
+build/*.aab
+*.pyc
+.DS_Store

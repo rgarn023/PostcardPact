@@ -1,0 +1,241 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpostcardpactmain01"]
+
+[ext_resource type="Script" path="res://scripts/ui/mobile_navigation.gd" id="1_mobile_nav"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mobile_nav")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0705882, 0.101961, 0.2, 1)
+
+[node name="ContentRoot" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 88
+
+[node name="PageStack" type="Control" parent="ContentRoot"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HomePage" type="Control" parent="ContentRoot/PageStack"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/HomePage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 36
+text = "Home"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FindPage" type="Control" parent="ContentRoot/PageStack"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/FindPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 36
+text = "Find"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JourneyPage" type="Control" parent="ContentRoot/PageStack"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/JourneyPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 36
+text = "Journey"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TradesPage" type="Control" parent="ContentRoot/PageStack"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/TradesPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 36
+text = "Trades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProfilePage" type="Control" parent="ContentRoot/PageStack"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/ProfilePage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 36
+text = "Profile"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomNav" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+self_modulate = Color(0.227451, 0.184314, 0.333333, 1)
+
+[node name="NavRow" type="HBoxContainer" parent="BottomNav"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HomeButton" type="Button" parent="BottomNav/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Home"
+
+[node name="FindButton" type="Button" parent="BottomNav/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Find"
+
+[node name="JourneyButton" type="Button" parent="BottomNav/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Journey"
+
+[node name="TradesButton" type="Button" parent="BottomNav/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Trades"
+
+[node name="ProfileButton" type="Button" parent="BottomNav/NavRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Profile"
+
+[connection signal="pressed" from="BottomNav/NavRow/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="BottomNav/NavRow/FindButton" to="." method="_on_find_button_pressed"]
+[connection signal="pressed" from="BottomNav/NavRow/JourneyButton" to="." method="_on_journey_button_pressed"]
+[connection signal="pressed" from="BottomNav/NavRow/TradesButton" to="." method="_on_trades_button_pressed"]
+[connection signal="pressed" from="BottomNav/NavRow/ProfileButton" to="." method="_on_profile_button_pressed"]

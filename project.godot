@@ -1,0 +1,26 @@
+; Engine configuration file.
+; Godot 4.7.1 — Postcard Pact offline prototype
+config_version=5
+
+[application]
+
+config/name="Postcard Pact"
+config/description="Independent community companion for manual postcard exchanges and friendship tracking. Never connects to Pokémon GO."
+run/main_scene="res://scenes/main/Main.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+config/icon=""
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=390
+window/size/window_height_override=844
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

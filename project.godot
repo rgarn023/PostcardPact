@@ -8,7 +8,11 @@ config/name="Postcard Pact"
 config/description="Independent community companion for manual postcard exchanges and friendship tracking. Never connects to Pokémon GO."
 run/main_scene="res://scenes/main/Main.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon=""
+config/icon="res://assets/icons/app_icon.png"
+
+[autoload]
+
+AppData="*res://scripts/autoload/app_data.gd"
 
 [display]
 

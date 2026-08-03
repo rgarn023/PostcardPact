@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpostcardpactmain01"]
+[gd_scene load_steps=7 format=3 uid="uid://bpostcardpactmain01"]
 
 [ext_resource type="Script" path="res://scripts/ui/mobile_navigation.gd" id="1_mobile_nav"]
+[ext_resource type="Script" path="res://scripts/ui/home_page.gd" id="2_home"]
+[ext_resource type="Script" path="res://scripts/ui/find_page.gd" id="3_find"]
+[ext_resource type="Script" path="res://scripts/ui/journey_page.gd" id="4_journey"]
+[ext_resource type="Script" path="res://scripts/ui/trades_page.gd" id="5_trades"]
+[ext_resource type="Script" path="res://scripts/ui/profile_page.gd" id="6_profile"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,25 +52,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_home")
 
-[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/HomePage"]
+[node name="HomeScroll" type="ScrollContainer" parent="ContentRoot/PageStack/HomePage"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
-theme_override_font_sizes/font_size = 36
-text = "Home"
+horizontal_scroll_mode = 0
+
+[node name="HomeBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="HomeTitle" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Postcard Pact"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="HomeDisclaimer" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Independent companion disclaimer"
+
+[node name="HomeSummaryPanel" type="PanelContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SummaryBox" type="VBoxContainer" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HomeDisplayName" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Display name"
+
+[node name="HomeRegion" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Region"
+
+[node name="HomeNeededCount" type="Label" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox/HomeSummaryPanel/SummaryBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Needed regions"
+
+[node name="HomeSetupButton" type="Button" parent="ContentRoot/PageStack/HomePage/HomeScroll/HomeBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Set Up Profile"
 
 [node name="FindPage" type="Control" parent="ContentRoot/PageStack"]
 unique_name_in_owner = true
@@ -76,25 +122,38 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_find")
 
-[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/FindPage"]
+[node name="FindScroll" type="ScrollContainer" parent="ContentRoot/PageStack/FindPage"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
-theme_override_font_sizes/font_size = 36
+horizontal_scroll_mode = 0
+
+[node name="FindBox" type="VBoxContainer" parent="ContentRoot/PageStack/FindPage/FindScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="FindHeader" type="Label" parent="ContentRoot/PageStack/FindPage/FindScroll/FindBox"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Find"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="FindDisclaimer" type="Label" parent="ContentRoot/PageStack/FindPage/FindScroll/FindBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Prototype matches"
+
+[node name="FindList" type="VBoxContainer" parent="ContentRoot/PageStack/FindPage/FindScroll/FindBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
 
 [node name="JourneyPage" type="Control" parent="ContentRoot/PageStack"]
 unique_name_in_owner = true
@@ -105,25 +164,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_journey")
 
-[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/JourneyPage"]
+[node name="JourneyScroll" type="ScrollContainer" parent="ContentRoot/PageStack/JourneyPage"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
-theme_override_font_sizes/font_size = 36
+horizontal_scroll_mode = 0
+
+[node name="JourneyBox" type="VBoxContainer" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="JourneyHeader" type="Label" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Journey"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="JourneyDisclaimer" type="Label" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "User-reported prototype"
+
+[node name="JourneyPanel" type="PanelContainer" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JourneyInner" type="VBoxContainer" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="JourneyPartnerLabel" type="Label" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel/JourneyInner"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Partner"
+
+[node name="JourneyInteractedCheck" type="CheckBox" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel/JourneyInner"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Interacted today"
+
+[node name="JourneyGiftSentCheck" type="CheckBox" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel/JourneyInner"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gift sent"
+
+[node name="JourneyGiftOpenedCheck" type="CheckBox" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel/JourneyInner"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gift opened"
+
+[node name="JourneyCommittedCheck" type="CheckBox" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox/JourneyPanel/JourneyInner"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Still committed to future trade"
+
+[node name="JourneyStatusLabel" type="Label" parent="ContentRoot/PageStack/JourneyPage/JourneyScroll/JourneyBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Status"
 
 [node name="TradesPage" type="Control" parent="ContentRoot/PageStack"]
 unique_name_in_owner = true
@@ -134,25 +241,65 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_trades")
 
-[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/TradesPage"]
+[node name="TradesScroll" type="ScrollContainer" parent="ContentRoot/PageStack/TradesPage"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
-theme_override_font_sizes/font_size = 36
+horizontal_scroll_mode = 0
+
+[node name="TradesBox" type="VBoxContainer" parent="ContentRoot/PageStack/TradesPage/TradesScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="TradesHeader" type="Label" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Trades"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="TradesDisclaimer" type="Label" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Trade disclaimer"
+
+[node name="TradesPanel" type="PanelContainer" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TradesInner" type="VBoxContainer" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox/TradesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WantedCreatureEdit" type="LineEdit" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox/TradesPanel/TradesInner"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+placeholder_text = "Wanted creature"
+
+[node name="OfferedCreatureEdit" type="LineEdit" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox/TradesPanel/TradesInner"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+placeholder_text = "Offered creature"
+
+[node name="SaveTradeButton" type="Button" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Save Request"
+
+[node name="TradeStatusLabel" type="Label" parent="ContentRoot/PageStack/TradesPage/TradesScroll/TradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Status"
 
 [node name="ProfilePage" type="Control" parent="ContentRoot/PageStack"]
 unique_name_in_owner = true
@@ -163,25 +310,87 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_profile")
 
-[node name="PageLabel" type="Label" parent="ContentRoot/PageStack/ProfilePage"]
+[node name="ProfileScroll" type="ScrollContainer" parent="ContentRoot/PageStack/ProfilePage"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
-theme_override_font_sizes/font_size = 36
+horizontal_scroll_mode = 0
+
+[node name="ProfileBox" type="VBoxContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="ProfileHeader" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.4, 1)
+theme_override_font_sizes/font_size = 34
 text = "Profile"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="ProfileHint" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788235, 0.752941, 0.85098, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+text = "Saved only on this device. Never enter a Pokémon GO password."
+
+[node name="DisplayNameEdit" type="LineEdit" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+placeholder_text = "Display name"
+
+[node name="TrainerCodeEdit" type="LineEdit" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+placeholder_text = "Trainer code"
+
+[node name="RegionOption" type="OptionButton" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+
+[node name="NeededHeader" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0.941176, 0.901961, 1)
+theme_override_font_sizes/font_size = 20
+text = "Needed regions"
+
+[node name="NeededScroll" type="ScrollContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="NeededRegionsList" type="VBoxContainer" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox/NeededScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SaveProfileButton" type="Button" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Save Profile"
+
+[node name="ResetProfileButton" type="Button" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Reset Profile"
+
+[node name="ProfileStatusLabel" type="Label" parent="ContentRoot/PageStack/ProfilePage/ProfileScroll/ProfileBox"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "Status"
 
 [node name="BottomNav" type="PanelContainer" parent="."]
 layout_mode = 1

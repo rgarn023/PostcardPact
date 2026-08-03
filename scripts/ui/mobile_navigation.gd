@@ -1,4 +1,5 @@
 extends Control
+class_name MobileNavigation
 ## Bottom-navigation controller for the Postcard Pact offline prototype.
 ## Attach this script to the root Main (Control) node of res://scenes/main/Main.tscn.
 ##

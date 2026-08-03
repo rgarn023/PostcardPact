@@ -129,7 +129,7 @@ For **each** nav button:
 1. Size Flags Horizontal = Expand + Fill
 2. Custom minimum size ≈ `Vector2(0, 56)`
 3. **Enable Unique Name** (Access as Unique Name)
-4. Do **not** enable `Toggle Mode` (script uses modulate for active state)
+4. Do **not** enable `Toggle Mode` (script disables the active page button)
 
 ---
 
@@ -246,15 +246,16 @@ Run the project (`F5`) after `Main.tscn` is the main scene.
 ### Default state
 - [ ] Home page is visible on launch.
 - [ ] Home page label reads `Home`.
-- [ ] Home nav button shows the warm golden active highlight.
+- [ ] Home nav button is disabled.
+- [ ] Other nav buttons are enabled.
 - [ ] Other pages are hidden.
 
 ### Navigation
-- [ ] Tap **Find** → only Find page visible; label reads `Find`; Find button highlighted.
-- [ ] Tap **Journey** → only Journey page visible; label reads `Journey`; Journey button highlighted.
-- [ ] Tap **Trades** → only Trades page visible; label reads `Trades`; Trades button highlighted.
-- [ ] Tap **Profile** → only Profile page visible; label reads `Profile`; Profile button highlighted.
-- [ ] Tap **Home** again → returns to Home correctly.
+- [ ] Tap **Find** → only Find page visible; Find button disabled; others enabled.
+- [ ] Tap **Journey** → only Journey page visible; Journey button disabled; others enabled.
+- [ ] Tap **Trades** → only Trades page visible; Trades button disabled; others enabled.
+- [ ] Tap **Profile** → only Profile page visible; Profile button disabled; others enabled.
+- [ ] Tap **Home** again → returns to Home; Home button disabled.
 
 ### Layout / mobile portrait
 - [ ] Content is not covered by the bottom bar.
